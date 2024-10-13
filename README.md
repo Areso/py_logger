@@ -24,4 +24,5 @@ git push
 on a remote:  
 ```
 git submodule init
+git submodule update --init
 ```
