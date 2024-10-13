@@ -26,3 +26,12 @@ on a remote:
 git submodule init
 git submodule update --init
 ```
+
+## to use inside your code
+```
+from py_logger.py_logger import setup_logger
+...
+
+logger_c = setup_logger()
+logger_c.info("Program has started")
+```
