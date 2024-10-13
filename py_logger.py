@@ -1,0 +1,68 @@
+import logging
+import json
+import subprocess
+
+def execute_command(command):
+    try:
+        # Execute the command
+        result = subprocess.run(command,
+                                shell=True,
+                                capture_output=True,
+                                text=True)        
+        # Get output and return code
+        output = result.stdout
+        error  = result.stderr
+        rc     = result.returncode
+        return output, error, rc
+    except Exception as e:
+        return None, str(e), -1
+
+
+def get_branch():
+    command = "git branch"
+    output, err, rc = execute_command(command)
+    if rc==0:
+        return output
+    else:
+        return "cannot get a git repo branch"
+
+def get_modified_files():
+    command = "git status -s | grep M"
+    output, err, rc = execute_command(command)
+    if rc==0:
+        return output
+    else:
+        return "NONE"
+
+class JSONFormatter(logging.Formatter):
+    def __init__(self):
+        super().__init__()
+        self.branch = get_branch()
+        self.modified_files = get_modified_files()
+    def format(self, record):
+        # Create a dictionary for log record attributes
+        log_record = {
+            'level':    record.levelname,
+            'time':     self.formatTime(record),
+            'message':  record.getMessage(),
+            'name':     record.name,
+            'filename': record.filename,
+            'lineno':   record.lineno,
+            'pathname': record.pathname,
+            'branch':   self.branch,#get_branch(),
+            'modified_files': self.modified_files # get_modified_files()
+        }
+        # Add additional info if needed (e.g., exception info)
+        if record.exc_info:
+            log_record['exception'] = self.formatException(record.exc_info)        
+        return json.dumps(log_record)
+    
+
+# Setup the logger
+logger_c       = logging.getLogger('jsonLogger')
+stream_handler = logging.StreamHandler()
+file_handler   = logging.FileHandler('json.log.json', mode='a') 
+stream_handler.setFormatter(JSONFormatter())
+file_handler.setFormatter(JSONFormatter())
+logger_c.addHandler(file_handler)
+logger_c.setLevel(logging.DEBUG)
