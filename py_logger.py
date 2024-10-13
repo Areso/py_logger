@@ -59,10 +59,14 @@ class JSONFormatter(logging.Formatter):
     
 
 # Setup the logger
-logger_c       = logging.getLogger('jsonLogger')
-stream_handler = logging.StreamHandler()
-file_handler   = logging.FileHandler('json.log.json', mode='a') 
-stream_handler.setFormatter(JSONFormatter())
-file_handler.setFormatter(JSONFormatter())
-logger_c.addHandler(file_handler)
-logger_c.setLevel(logging.DEBUG)
+def setup_logger():
+    logger_c = logging.getLogger('jsonLogger')
+    if not logger_c.hasHandlers():  # Avoid adding handlers multiple times
+        stream_handler = logging.StreamHandler()
+        file_handler   = logging.FileHandler('json.log.json', mode='a') 
+        stream_handler.setFormatter(JSONFormatter())
+        file_handler.setFormatter(JSONFormatter())
+        logger_c.addHandler(stream_handler)
+        logger_c.addHandler(file_handler)
+        logger_c.setLevel(logging.DEBUG)
+    return logger_c
