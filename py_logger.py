@@ -17,6 +17,13 @@ def execute_command(command):
     except Exception as e:
         return None, str(e), -1
 
+def get_reponame():
+    command = "basename -s .git `git config --get remote.origin.url`"
+    output, err, rc = execute_command(command)
+    if rc==0:
+        return output
+    else:
+        return "cannot get a git repo name"
 
 def get_branch():
     command = "git branch"
@@ -37,8 +44,9 @@ def get_modified_files():
 class JSONFormatter(logging.Formatter):
     def __init__(self):
         super().__init__()
-        self.branch = get_branch()
+        self.branch         = get_branch()
         self.modified_files = get_modified_files()
+        self.reponame       = get_reponame()
     def format(self, record):
         # Create a dictionary for log record attributes
         log_record = {
@@ -49,6 +57,7 @@ class JSONFormatter(logging.Formatter):
             'filename': record.filename,
             'lineno':   record.lineno,
             'pathname': record.pathname,
+            'reponame': self.reponame,
             'branch':   self.branch,#get_branch(),
             'modified_files': self.modified_files # get_modified_files()
         }
