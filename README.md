@@ -1,5 +1,29 @@
 # py_logger
 
+## installation through PyPi
+`pip3 install json-dev-logger`  
+in a project:  
+```
+import py_logger
+
+mylogger = py_logger.setup_logger()
+mylogger.info("test")
+```  
+
+example of a record:  
+```
+{"level": "INFO", 
+ "time": "2025-03-26 19:48:07,797", 
+ "message": "test", 
+ "name": "jsonLogger", 
+ "filename": "1.py", 
+ "lineno": 4, 
+ "pathname": "/home/username/git/dbaas/py_logger/1.py", 
+ "reponame": "py_logger\n", 
+ "branch": "* master\n", 
+ "modified_files": " M README.md\n"}
+```
+
 ## locally:  
 to add:  
 ```
