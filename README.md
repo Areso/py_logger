@@ -1,13 +1,18 @@
 # py_logger
+Project homepage is https://github.com/Areso/py_logger
 
-## installation through PyPi
+## Why?
+
+I like to tinker things, and while I am writing the code, I am also the person who runs the code as well. This why I made this small library to gather enriched logs from my Python-powered projects. The enriched data includes name of the repo, branch, manually modified files (when debugging I could change something with my barehands right on a server, where my projects run)
+
+## Installation through PyPi
 `pip3 install json-dev-logger`  
 in a project:  
 ```
-import py_logger
+from py_logger import setup_logger
 
-mylogger = py_logger.setup_logger()
-mylogger.info("test")
+logger = setup_logger()
+logger.info("test")
 ```  
 
 example of a record:  
@@ -18,44 +23,8 @@ example of a record:
  "name": "jsonLogger", 
  "filename": "1.py", 
  "lineno": 4, 
- "pathname": "/home/username/git/dbaas/py_logger/1.py", 
+ "pathname": "/home/username/git/py_logger/1.py", 
  "reponame": "py_logger\n", 
  "branch": "* master\n", 
  "modified_files": " M README.md\n"}
-```
-
-## locally:  
-to add:  
-```
-git submodule add git@github.com:Areso/py_logger.git
-git submodule update --init
-```  
-
-to update:  
-```
-git submodule update --remote
-git commit -am "Upgraded dependency"
-```
-to downgrade:  
-```
-cd path/to/submodule_dir/within/the?repo
-git reset --hard <commit_hash_or_tag>
-cd ..
-git commit -am "Downgraded dependency"
-git push
-```
-
-on a remote:  
-```
-git submodule init
-git submodule update --init
-```
-
-## to use inside your code
-```
-from py_logger.py_logger import setup_logger
-...
-
-logger_c = setup_logger()
-logger_c.info("Program has started")
 ```
