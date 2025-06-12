@@ -2,18 +2,21 @@ import logging
 import json
 import subprocess
 
-def execute_command(command):
+def execute_command(command, timeout=10):
     try:
         # Execute the command
         result = subprocess.run(command,
                                 shell=True,
                                 capture_output=True,
-                                text=True)        
+                                text=True,
+                                timeout=timeout)        
         # Get output and return code
         output = result.stdout
         error  = result.stderr
         rc     = result.returncode
         return output, error, rc
+    except subprocess.TimeoutExpired as e:
+        return None, f"Command timed out after {timeout} seconds", -1
     except Exception as e:
         return None, str(e), -1
 
