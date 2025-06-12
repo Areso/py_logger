@@ -24,7 +24,8 @@ example of a record:
  "filename": "1.py", 
  "lineno": 4, 
  "pathname": "/home/username/git/py_logger/1.py", 
- "reponame": "py_logger\n", 
- "branch": "* master\n", 
- "modified_files": " M README.md\n"}
+ "hostname": "devserver-24",
+ "reponame": "py_logger", 
+ "branch": "master", 
+ "modified_files": " M README.md"}
 ```
