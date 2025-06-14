@@ -1,4 +1,6 @@
 # py_logger
+[![PyPI Downloads](https://static.pepy.tech/badge/json-dev-logger)](https://pepy.tech/projects/json-dev-logger)
+
 Project homepage is https://github.com/Areso/py_logger
 
 ## Why?
