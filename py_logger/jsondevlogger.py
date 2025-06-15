@@ -75,8 +75,8 @@ class JSONFormatter(logging.Formatter):
             'pathname': record.pathname,
             'hostname': self.hostname,
             'reponame': self.reponame,
-            'branch':   self.branch,#get_branch(),
-            'modified_files': self.modified_files # get_modified_files()
+            'branch':   self.branch,
+            'modified_files': self.modified_files
         }
         # Add additional info if needed (e.g., exception info)
         if record.exc_info:
