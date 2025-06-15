@@ -27,7 +27,7 @@ def get_reponame():
         return "cannot get a git repo name"
 
 def get_branch():
-    command = "git branch"
+    command = "git branch --show-current"  # check minimal git vesion compatible with the key
     output, err, rc = execute_command(command)
     if rc==0:
         return output.strip()
@@ -47,7 +47,6 @@ def get_hostname(binary="hostname"):
         command = "hostname"
     elif binary == "uname":
         command = "uname -n"
-        #command = "echo COOL"
     else:
         command = "hostname"
     output, err, rc = execute_command(command)
