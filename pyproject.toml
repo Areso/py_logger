@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "json-dev-logger"
-version = "0.0.14"
+version = "0.0.15"
 description = "json logger, very helpful for developers at developing stage"
 authors = [
   { name="Areso", email="returnstrike@yandex.com" }
