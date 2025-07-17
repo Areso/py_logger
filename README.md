@@ -1,5 +1,6 @@
 # py_logger
-[![PyPI Downloads](https://static.pepy.tech/badge/json-dev-logger)](https://pepy.tech/projects/json-dev-logger)
+[![PyPI Downloads](https://static.pepy.tech/badge/json-dev-logger)](https://pepy.tech/projects/json-dev-logger)  
+[![Snyk Vulnerability Database report](https://snyk.io/advisor/images/snyk-poweredby.svg)](https://security.snyk.io/package/pip/json-dev-logger)  
 
 Project homepage is https://github.com/Areso/py_logger
 
